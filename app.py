@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import get_pdf_text
+from utils import get_pdf_text, extracted_data
 
 
 
@@ -29,6 +29,12 @@ if uploaded_files:
         st.markdown(f"### Dosya: `{file.name}`")
         try:
             raw_text = get_pdf_text(file)
-            st.text_area("📃 Metin Çıktısı", raw_text, height=300)
+            st.text_area("📃 Faturadaki Metin", raw_text, height=250)
+
+            if st.button(f"📤 `{file.name}` için Veriyi Çıkar"):
+                with st.spinner("Claude veriyi cikariyor..."):
+                    json_output = extracted_data(raw_text)
+                    st.code(json_output, language="json")
+
         except Exception as e:
             st.error(f"❌ Hata oluştu: {e}")
