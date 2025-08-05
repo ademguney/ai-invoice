@@ -1,7 +1,7 @@
 from pypdf import PdfReader
 
 
-def get_pdf_tesxt(pdf_doc) -> str:
+def get_pdf_text(pdf_doc):
     text = ""
     pdf_reader = PdfReader(pdf_doc)
     for page in pdf_reader.pages:
