@@ -1,8 +1,11 @@
-from pypdf import PdfReader
+import json
 import os
-from dotenv import load_dotenv
+import re
+import pandas as pd
 import anthropic
+from pypdf import PdfReader
 from langchain_core.prompts import PromptTemplate
+from dotenv import load_dotenv
 
 
 # Load enviroment variables (.env)
@@ -53,3 +56,15 @@ def extracted_data(pages_data: str) -> str:
         ]
     )
     return response.content[0].text
+
+# step 3
+def clean_invoice_text(text: str):
+    return re.sub(r"\s+", " ", text).strip()
+
+def json_to_dataframe(json_text: str):
+    try:
+        data_dict = json.loads(json_text)
+        return pd.DataFrame([data_dict])
+    except Exception as e:
+        print("JSON parse hatası:", e)
+        return pd.DataFrame()
