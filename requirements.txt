@@ -1,0 +1,18 @@
+# Web UI
+streamlit
+
+# PDF Parsing
+pypdf
+
+# Data Handling
+pandas
+openpyxl
+
+# Environment Variables
+python-dotenv
+
+# Anthropic Claude API
+anthropic
+
+# LangChain Prompt Formatting
+langchain-core
